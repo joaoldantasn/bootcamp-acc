@@ -21,9 +21,9 @@ public class Main {
 		
 		try {
 			conta.depositar(70000);
-			conta2.depositar(100);
+			conta2.depositar(-100);
 		}catch(DepositoInvalidoException err) {
-			
+			err.printStackTrace();
 		}
 		
 		
@@ -33,10 +33,10 @@ public class Main {
 		System.out.println("---------------------------");
 		
 		try {
-			conta.sacar(20000);
+			conta.sacar(20000000);
 			conta2.sacar(10000);
 		} catch (EstouroSaqueException err) {
-			
+			err.printStackTrace();
 		}
 		
 	
