@@ -22,8 +22,7 @@ public class Main {
 	private static BankService service = ServiceFactory.getService();
 
 	public static void main(String[] args) {
-		//TO test here
-		// Complete o código aqui
+		
 
 	}
 
@@ -108,8 +107,14 @@ public class Main {
 	 * 5. Imprime na tela o nome de todos os clientes que possuem conta poupança (tipo SAVING)
 	 */
 	public static void imprimirClientesComPoupanca() {
-		// Complete o código aqui
-
+	    service
+	    .listClients()
+	    .stream()
+	    .filter(cliente -> 
+	        cliente.getAccounts().stream().anyMatch(conta -> conta.getType().equals("SAVING"))
+	    )
+	    .map(cliente -> cliente.getName())
+	    .forEach(System.out::println);
 	}
 
 	/**
@@ -134,10 +139,14 @@ public class Main {
 	 * @return Retorna uma lista de inteiros com os números das contas daquele país
 	 */
 	public static int[] getNumerosContas(String country) {
-		int [] countryNumbers =
-				// Complete o código aqui
-
-		return (int[]) countryNumbers;
+	    int[] countryNumbers = service
+	        .listAccounts() 
+	        .stream() 
+	        .filter(conta -> conta.getClient().getAddress().getCountry().equals(country)) 
+	        .mapToInt(conta -> conta.getNumber()) 
+	        .toArray(); 
+	    
+	    return countryNumbers;
 	}
 
 	/**
@@ -214,9 +223,12 @@ public class Main {
 	 * @return Retorna uma lista com todas as contas conjuntas (JOINT) dos clientes
 	 */
 	public static List<Account> getContasConjuntas(List<Client> clients) {
-		List<Account> jointAccounts = new ArrayList<Account>();
-		// Complete o código aqui
-		return jointAccounts;
+	    List<Account> jointAccounts = new ArrayList<>();
+	    jointAccounts = service.listAccounts()
+	    		.stream()
+	    		.filter(account -> account.getType() == AccountEnum.JOINT)
+	    		.collect(Collectors.toList());
+	    return jointAccounts;
 	}
 
 	/**

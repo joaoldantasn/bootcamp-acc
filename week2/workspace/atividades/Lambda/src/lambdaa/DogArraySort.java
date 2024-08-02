@@ -1,9 +1,7 @@
-package acc.lambda.sample;
+package lambdaa;
 
 
 import java.util.Arrays;
-import java.util.Comparator;
-import java.util.stream.Stream;
  
 public class DogArraySort {
  
@@ -16,7 +14,7 @@ public class DogArraySort {
 		printDogs(dogArray);
  
 
-//		Expressão Lambda 
+//		Expressï¿½o Lambda 
 		Arrays.sort(dogArray, (Dog m, Dog n) -> m.getWeight() - n.getWeight());
 		printDogs(dogArray);
 

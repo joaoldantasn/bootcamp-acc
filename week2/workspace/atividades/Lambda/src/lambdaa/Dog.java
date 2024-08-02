@@ -1,4 +1,4 @@
-package acc.lambda.sample;
+package lambdaa;
 
 public class Dog {
 	String name;

@@ -1,4 +1,4 @@
-package acc.lambda.sample;
+package lambdaa;
 
 import java.util.stream.Stream;
 
