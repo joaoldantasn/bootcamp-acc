@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React Example</title>
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <style>
+      .container {
+        text-align: center;
+        margin-top: 50px;
+      }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+        const { useState } = React;
+
+        function App() {
+            const [data, setData] = useState(null);
+            const [error, setError] = useState(null);
+
+            const getNotas = async () => {
+                try {
+                    const response = await axios.get('http://localhost:8080/student');
+                    setData(response.data);
+                    setError(null);
+                } catch (error) {
+                    setError(error.message);
+                    setData(null);
+                }
+            };
+
+            return (
+                <div className="container">
+                    <h1>React Front-End:</h1>
+                    <button onClick={getNotas}>Pegar dados</button>
+                    <br /><br />
+                    <div>
+                        Response Data: {data ? JSON.stringify(data) : 'No Data'} <br /><br />
+                        Error: {error ? error : 'No Error'}
+                    </div>
+                </div>
+            );
+        }
+
+        ReactDOM.render(<App />, document.getElementById('root'));
+    </script>
+</body>
+</html>
